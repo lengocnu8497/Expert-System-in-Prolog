@@ -3,6 +3,7 @@
 top_goal(X):-
 	cscourse(X).
 	
+% Core CS Courses
 cscourse(BIO1110):-
 	(year(freshman); year(sophomore); year(junior); year(senior)),	% require to be in a specific year based on units completed
 	prereq(none).
@@ -43,6 +44,50 @@ cscourse(CS2400):-
     year(sophomore),
     (prereq(CS1400);prereq(CS1300)),
 	(prereq(MAT1140);prereq(MAT1150);prereq(MAT2140)).
+	
+cscourse(CS2640):-
+    year(sophomore),
+    prereq(CS2400).
+	
+cscourse(CS3110):-
+    year(junior),
+    prereq(CS2400).
+	
+cscourse(CS3110):-
+    year(junior),
+    prereq(CS2400),
+	prereq(MAT2250).
+	
+cscourse(CS3650):-
+	year(junior),
+	prereq(CS2640).
+	
+cscourse(CS3750):-
+	year(junior);
+	year(senior).
+	
+cscourse(CS4080):-
+	year(junior);
+	year(senior),
+	prereq(CS2640),
+	prereq(CS3110).
+	
+cscourse(CS4310):-
+	year(junior);
+	year(senior),
+	prereq(CS2400),
+	prereq(CS3650).
+	
+cscourse(CS4630):-
+	year(senior).
+
+cscourse(CS4080):-
+	year(junior);
+	year(senior),
+	prereq(CS2400).
+
+	
+
 
 freshman:-
 	units(N).
@@ -57,17 +102,11 @@ senior:-
     units(N).
 	
 prereq(C):-
-    cscourse(C).
+    known(Yes,C).
 	
 year(X):-
     ask(year,X).
 	
-menuask(A,V,MenuList):-
-    write('What is the value for '), write(A), write(' ?'), nl,
-	write(MenuList), nl, 
-	read(X), 
-	check_val(X, A, V, MenuList),
-    asserta( known(yes, A, X) ),
-    X == V. 
+
 
 
