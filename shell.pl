@@ -9,7 +9,7 @@ main:-
 	X == quit.
 	
 greeting:-
-	write('This is a Prolog shell.',
+	write('This is a Prolog shell.'),
 	nl.
 	
 do(load):-

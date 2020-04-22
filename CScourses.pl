@@ -5,12 +5,12 @@ top_goal(X):-
 	
 % Core CS Courses
 cscourse(BIO1110):-
-	(year(freshman); year(sophomore); year(junior); year(senior)),	% require to be in a specific year based on units completed
-	prereq(none).
+	(year(freshman); year(sophomore); year(junior); year(senior)).	% require to be in a specific year based on units completed
+	
 	
 cscourse(BIO110L):-
     (year(freshman); year(sophomore); year(junior); year(senior)),
-	prereq(BIO1110).
+	coreq(BIO1110).
 	
 cscourse(CS1300):-
     year(freshman),
@@ -86,26 +86,73 @@ cscourse(CS4080):-
 	year(senior),
 	prereq(CS2400).
 
+cscourse(MAT2250):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	prereq(CS2640),
+	prereq(CS3110).
 	
+cscourse(PHY1510):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	prereq(MAT1140);
+	prereq(MAT1150),
+	coreq(PHY1510L).
+	
+cscourse(PHY1520):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	coreq(PHY1520L).
+	
+cscourse(STA2260):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	prereq(MAT1150);
+	prereq(MAT1310).
+	
+% prereq additional classes
+cscourse(MAT1050):-
+	year(freshman);
+	year(sophomore);
+	year(junior),
+	prereq(MAT1050).
+	
+cscourse(MAT1052):-
+	year(freshman);
+	year(sophomore);
+	year(junior),
+	prereq(MAT1051).
+	
+cscourse(MAT1060):-
+	year(freshman);
+	year(sophomore);
+	year(junior),
+	prereq(STA2100).
+	
+cscourse(MAT1310):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	prereq(MAT1150);
+	prereq(MAT1300).
+	
+cscourse(MAT1300):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(MAT1050),prereq(MAT1060));
+	(prereq(MAT1052),prereq(MAT1060)).
 
-
-freshman:-
-	units(N).
-	
-sophomore:-
-    units(N).
-	
-junior:-
-    units(N).
-	
-senior:-
-    units(N).
 	
 prereq(C):-
-    known(Yes,C).
+    ask(prereq,C).
 	
 year(X):-
-    ask(year,X).
+    menuask(year,X,[freshman,sophomore,junior,senior]).
 	
 
 
