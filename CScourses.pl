@@ -147,13 +147,162 @@ cscourse(MAT1300):-
 	(prereq(MAT1050),prereq(MAT1060));
 	(prereq(MAT1052),prereq(MAT1060)).
 
+cscourse(CS1280):-
+	year(freshman);
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(MAT1050), prereq(MAT1052));
+	(prereq(MAT1060));
+	(prereq(MAT1140));
+	(prereq(MAT1150));
+	(prereq(MAT2140)).
+
+
+% elective cs courses
+cselective(CS3520):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS3700):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS3310)).
+
+cselective(CS3800):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400);
+	prereq(CS2640)).
+
+cselective(CS4110):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS3110)).
+
+cselective(CS4200):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS3310)).
+
+cselective(CS4210):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2410));
+	(prereq(CS3010)).
+
+cselective(CS4250):-
+	year(sophomore);
+	year(junior);
+	year(senior).
+
+cselective(CS4350):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS4450):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400));
+	(prereq(CS2560)).
+
+cselective(CS4500):-
+	year(sophomore);
+	year(junior);
+	year(senior).
+
+cselective(CS4600):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS4650):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS4700):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS4750):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS2400)).
+
+cselective(CS4810):-
+	year(sophomore);
+	year(junior);
+	year(senior).
+
+cselective(CS4990):-
+	year(senior).
+
+cselective(CS2450):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS1400)).
+
+cselective(CS2520):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS1400), prereq(CS1280)).
+
+ceselective(CS2560):-
+	year(sophomore);
+	year(junior);
+	year(senior),
+	(prereq(CS1400), prereq(CS1280)).
+
+cselective(CS2990):-
+	year(sophomore);
+	year(junior);
+	year(senior).
+
+cselective(CS2000):-
+	year(sophomore);
+	year(junior);
+	year(senior).
+
+cselective(CS4000):-
+	year(junior);
+	year(senior).
+
+cselective(CS4410):-
+	year(junior);
+	year(senior).
+
+cselective(CS4610):-
+	year(junior);
+	year(senior).
+
+cselective(CS4620):-
+	year(junior);
+	year(senior),
+	(prereq(4610)).
 	
 prereq(C):-
     ask(prereq,C).
 	
 year(X):-
     menuask(year,X,[freshman,sophomore,junior,senior]).
-	
 
 
 
