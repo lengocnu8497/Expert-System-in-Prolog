@@ -5,11 +5,11 @@ top_goal(X):-
 	
 % Core CS Courses
 cscourse(BIO1110):-
-	(year(freshman); year(sophomore); year(junior); year(senior)).	% require to be in a specific year based on units completed
+	year(freshman).	 
 	
 	
 cscourse(BIO110L):-
-    (year(freshman); year(sophomore); year(junior); year(senior)),
+    year(freshman),
 	coreq(BIO1110).
 	
 cscourse(CS1300):-
@@ -296,13 +296,99 @@ cselective(CS4610):-
 cselective(CS4620):-
 	year(junior);
 	year(senior),
-	(prereq(4610)).
+	(prereq(CS4610)).
 	
 prereq(C):-
     ask(prereq,C).
 	
+coreq(C):-
+	ask(coreq,C).
+	
 year(X):-
     menuask(year,X,[freshman,sophomore,junior,senior]).
+	
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%%%%%%%%%%% Shell for user in Prolog %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+main:-
+	greeting,
+	repeat,
+	write('> '),
+	read(X),
+	do(X),
+	X == quit.
+	
+greeting:-
+	write('Thsi si a Expert System for recommending CS courses at CPP.'),
+	nl.
+	
+do(consult):-
+	solve,
+	!.
+	
+do(quit).
+
+do(X):-
+	write(X),
+	write(' is not a command.'),
+	nl,
+	fail.
+	
+load_kb:-
+	write('Enter file name: '),
+	read(F),
+	reconsult(F).       					% update KB with known clauses
+	
+ask(Attribute, Value):-
+	known(yes, Attribute, Value),   		% succeed if true
+	!.                  		% stop looking
+	
+ask(Attribute, Value):-
+	known(_, Attribute, Value),     		% fail if false
+	!,
+	fail.
+	
+ask(Attribute, Value):-
+	write(Attribute:Value),         		% ask user
+	write('? : '),
+	read(Y),            					% get the answer
+	asserta(known(Y, Attribute, Value)), 	% remember it
+    Y == yes. 								% succeed or fail 
+	
+menuask(Attribute,Value,_) :-
+	known(yes,Attribute,Value), 			% succeed if we know
+	!.
+menuask(Attribute,_,_) :-
+	known(yes,Attribute,_), 				% fail if its some other value
+	!, fail.
+	
+menuask(Attribute,Value,MenuList):-
+	write('What is the value for '),write(Attribute), write('?'), nl,
+	write(MenuList),nl,
+	read(X),
+	check_val(X,Attribute,Value,MenuList),
+	asserta(known(yes,Attribute,X)),
+	X==Value.
+	
+check_val(X,Attribute,Value,MenuList):-
+	member(X,MenuList),
+	!.
+	
+check_val(X,Attribute,Value,MenuList):-
+	write(X), write(' is not a legal value, try again.'), nl,
+	menuask(Attribute, Value, MenuList). 
+	
+	
+solve :-
+	abolish(known, 3),
+	top_goal(X),
+	write('Your recommended course is '), write(X), nl.
+solve :-
+	write('No answer found.'), nl. 
+	
+
 
 
 
