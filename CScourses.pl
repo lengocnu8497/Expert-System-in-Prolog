@@ -1,311 +1,311 @@
-% CS Courses Offered by Cal Poly Pomona for B.S Program
+% cs Courses Offered by Cal Poly Pomona for B.S Program
 
 top_goal(X):-
 	cscourse(X).
 	
-% Core CS Courses
-cscourse(BIO1110):-
+% Core cs Courses
+cscourse(bio1110):-
 	year(freshman).	 
 	
 	
-cscourse(BIO110L):-
+cscourse(bio1110l):-
     year(freshman),
-	coreq(BIO1110).
+	coreq(bio1110).
 	
-cscourse(CS1300):-
-    year(freshman),
-	(
-	 (prereq(MAT1050),prereq(MAT1060));
-	 (prereq(MAT1052),prereq(MAT1060));
-	  prereq(MAT1140);
-	  prereq(MAT1150);
-	  prereq(MAT2140)
-	).
-	
-cscourse(CS1400):-
+cscourse(cs1300):-
     year(freshman),
 	(
-	 (prereq(MAT1050),prereq(MAT1060));    % needs prereq check
-	 (prereq(MAT1052),prereq(MAT1060));    % needs prereq check
-	  prereq(MAT1140);
-	  prereq(MAT1150);
-	  prereq(MAT2140)                      % needs prereq check
+	 (prereq(mat1050),prereq(mat1060));
+	 (prereq(mat1052),prereq(mat1060));
+	  prereq(mat1140);
+	  prereq(mat1150);
+	  prereq(mat2140)
 	).
 	
-cscourse(MAT1140):-
+cscourse(cs1400):-
     year(freshman),
-    (prereq(MAT1050),prereq(MAT1060)).
+	(
+	 (prereq(mat1050),prereq(mat1060));    % needs prereq check
+	 (prereq(mat1052),prereq(mat1060));    % needs prereq check
+	  prereq(mat1140);
+	  prereq(mat1150);
+	  prereq(mat2140)                      % needs prereq check
+	).
 	
-cscourse(MAT1150):-
+cscourse(mat1140):-
     year(freshman),
-    prereq(MAT1140).
+    (prereq(mat1050),prereq(mat1060)).
 	
-cscourse(CS2400):-
+cscourse(mat1150):-
+    year(freshman),
+    prereq(mat1140).
+	
+cscourse(cs2400):-
     year(sophomore),
-    (prereq(CS1400);prereq(CS1300)),
-	(prereq(MAT1140);prereq(MAT1150);prereq(MAT2140)).
+    (prereq(cs1400);prereq(cs1300)),
+	(prereq(mat1140);prereq(mat1150);prereq(mat2140)).
 	
-cscourse(CS2640):-
+cscourse(cs2640):-
     year(sophomore),
-    prereq(CS2400).
+    prereq(cs2400).
 	
-cscourse(CS3110):-
+cscourse(cs3110):-
     year(junior),
-    prereq(CS2400).
+    prereq(cs2400).
 	
-cscourse(CS3110):-
+cscourse(cs3110):-
     year(junior),
-    prereq(CS2400),
-	prereq(MAT2250).
+    prereq(cs2400),
+	prereq(mat2250).
 	
-cscourse(CS3650):-
+cscourse(cs3650):-
 	year(junior),
-	prereq(CS2640).
+	prereq(cs2640).
 	
-cscourse(CS3750):-
+cscourse(cs3750):-
 	year(junior);
 	year(senior).
 	
-cscourse(CS4080):-
+cscourse(cs4080):-
 	year(junior);
 	year(senior),
-	prereq(CS2640),
-	prereq(CS3110).
+	prereq(cs2640),
+	prereq(cs3110).
 	
-cscourse(CS4310):-
+cscourse(cs4310):-
 	year(junior);
 	year(senior),
-	prereq(CS2400),
-	prereq(CS3650).
+	prereq(cs2400),
+	prereq(cs3650).
 	
-cscourse(CS4630):-
+cscourse(cs4630):-
 	year(senior).
 
-cscourse(CS4080):-
+cscourse(cs4800):-
 	year(junior);
 	year(senior),
-	prereq(CS2400).
+	prereq(cs2400).
 
-cscourse(MAT2250):-
+cscourse(mat2250):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	prereq(CS2640),
-	prereq(CS3110).
+	prereq(cs2640),
+	prereq(cs3110).
 	
-cscourse(PHY1510):-
+cscourse(phy1510):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	prereq(MAT1140);
-	prereq(MAT1150),
-	coreq(PHY1510L).
+	prereq(mat1140);
+	prereq(mat1150),
+	coreq(phy1510L).
 	
-cscourse(PHY1520):-
+cscourse(phy1520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	coreq(PHY1520L).
+	coreq(phy1520L).
 	
-cscourse(STA2260):-
+cscourse(sta2260):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	prereq(MAT1150);
-	prereq(MAT1310).
+	prereq(mat1150);
+	prereq(mat1310).
 	
 % prereq additional classes
-cscourse(MAT1050):-
+cscourse(mat1050):-
 	year(freshman);
 	year(sophomore);
 	year(junior),
-	prereq(MAT1050).
+	prereq(mat1050).
 	
-cscourse(MAT1052):-
+cscourse(mat1052):-
 	year(freshman);
 	year(sophomore);
 	year(junior),
-	prereq(MAT1051).
+	prereq(mat1051).
 	
-cscourse(MAT1060):-
+cscourse(mat1060):-
 	year(freshman);
 	year(sophomore);
 	year(junior),
-	prereq(STA2100).
+	prereq(sta2100).
 	
-cscourse(MAT1310):-
+cscourse(mat1310):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	prereq(MAT1150);
-	prereq(MAT1300).
+	prereq(mat1150);
+	prereq(mat1300).
 	
-cscourse(MAT1300):-
+cscourse(mat1300):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(MAT1050),prereq(MAT1060));
-	(prereq(MAT1052),prereq(MAT1060)).
+	(prereq(mat1050),prereq(mat1060));
+	(prereq(mat1052),prereq(mat1060)).
 
-cscourse(CS1280):-
+cscourse(cs1280):-
 	year(freshman);
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(MAT1050), prereq(MAT1052));
-	(prereq(MAT1060));
-	(prereq(MAT1140));
-	(prereq(MAT1150));
-	(prereq(MAT2140)).
+	(prereq(mat1050), prereq(mat1052));
+	(prereq(mat1060));
+	(prereq(mat1140));
+	(prereq(mat1150));
+	(prereq(mat2140)).
 
 
 % elective cs courses
-cselective(CS3520):-
+cselective(cs3520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS3700):-
+cselective(cs3700):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS3310)).
+	(prereq(cs3310)).
 
-cselective(CS3800):-
+cselective(cs3800):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400);
-	prereq(CS2640)).
+	(prereq(cs2400);
+	prereq(cs2640)).
 
-cselective(CS4110):-
+cselective(cs4110):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS3110)).
+	(prereq(cs3110)).
 
-cselective(CS4200):-
+cselective(cs4200):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS3310)).
+	(prereq(cs3310)).
 
-cselective(CS4210):-
+cselective(cs4210):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2410));
-	(prereq(CS3010)).
+	(prereq(cs2410));
+	(prereq(cs3010)).
 
-cselective(CS4250):-
+cselective(cs4250):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(CS4350):-
+cselective(cs4350):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS4450):-
+cselective(cs4450):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400));
-	(prereq(CS2560)).
+	(prereq(cs2400));
+	(prereq(cs2560)).
 
-cselective(CS4500):-
+cselective(cs4500):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(CS4600):-
+cselective(cs4600):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS4650):-
+cselective(cs4650):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS4700):-
+cselective(cs4700):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS4750):-
+cselective(cs4750):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS2400)).
+	(prereq(cs2400)).
 
-cselective(CS4810):-
+cselective(cs4810):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(CS4990):-
+cselective(cs4990):-
 	year(senior).
 
-cselective(CS2450):-
+cselective(cs2450):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS1400)).
+	(prereq(cs1400)).
 
-cselective(CS2520):-
+cselective(cs2520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS1400), prereq(CS1280)).
+	(prereq(cs1400), prereq(cs1280)).
 
-ceselective(CS2560):-
+ceselective(cs2560):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	(prereq(CS1400), prereq(CS1280)).
+	(prereq(cs1400), prereq(cs1280)).
 
-cselective(CS2990):-
+cselective(cs2990):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(CS2000):-
+cselective(cs2000):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(CS4000):-
+cselective(cs4000):-
 	year(junior);
 	year(senior).
 
-cselective(CS4410):-
+cselective(cs4410):-
 	year(junior);
 	year(senior).
 
-cselective(CS4610):-
+cselective(cs4610):-
 	year(junior);
 	year(senior).
 
-cselective(CS4620):-
+cselective(cs4620):-
 	year(junior);
 	year(senior),
-	(prereq(CS4610)).
+	(prereq(cs4610)).
 	
-prereq(C):-
-    ask(prereq,C).
+prereq(Course):-
+    ask(prereq,Course).
 	
-coreq(C):-
-	ask(coreq,C).
+coreq(Course):-
+	ask(coreq,Course).
 	
-year(X):-
-    menuask(year,X,[freshman,sophomore,junior,senior]).
+year(Standing):-
+    menuask(year,Standing,[freshman,sophomore,junior,senior]).
 	
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
@@ -321,11 +321,18 @@ main:-
 	X == quit.
 	
 greeting:-
-	write('Thsi si a Expert System for recommending CS courses at CPP.'),
+	write('Expert System for CS Courses Recommendation at CPP.'), nl,
+	write('Type "consult." to start consulting.'), nl,
+	write('Type "question." to verify class eligibility.'), nl,
+	write('Type "quit." to exit.'), nl,
 	nl.
 	
 do(consult):-
 	solve,
+	!.
+	
+do(question):-
+	resolve,
 	!.
 	
 do(quit).
@@ -334,12 +341,7 @@ do(X):-
 	write(X),
 	write(' is not a command.'),
 	nl,
-	fail.
-	
-load_kb:-
-	write('Enter file name: '),
-	read(F),
-	reconsult(F).       					% update KB with known clauses
+	fail.     					% update KB with known clauses
 	
 ask(Attribute, Value):-
 	known(yes, Attribute, Value),   		% succeed if true
@@ -382,11 +384,18 @@ check_val(X,Attribute,Value,MenuList):-
 	
 	
 solve :-
-	abolish(known, 3),
+	retractall(known(_,_,_)),
 	top_goal(X),
 	write('Your recommended course is '), write(X), nl.
 solve :-
 	write('No answer found.'), nl. 
+	
+resolve :-
+	write('What class do you want to take (ex. cs3750)? '),nl,
+	read(X),
+	top_goal(X) -> (write('Eligible! '),nl);
+	write('Not eligible. '),nl.
+	
 	
 
 
