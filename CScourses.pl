@@ -265,7 +265,7 @@ cselective(cs2520):-
 	year(senior),
 	(prereq(cs1400), prereq(cs1280)).
 
-ceselective(cs2560):-
+cselective(cs2560):-
 	year(sophomore);
 	year(junior);
 	year(senior),
@@ -397,7 +397,6 @@ resolve :-
 	write('Not eligible. '),nl.
 	
 	
-
 
 
 
