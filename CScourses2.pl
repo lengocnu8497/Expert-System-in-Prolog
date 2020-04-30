@@ -148,7 +148,7 @@ cs4630:-
 	asserta(known(yes,cscourse,cs4630)).
 	
 cs4800:-
-	asserta(known(yes,cscourse,cs2400)).
+	asserta(known(yes,cscourse,cs4800)).
 	
 mat2250:-
 	mat1150,
@@ -208,15 +208,31 @@ main:-
 	
 go:-
 	retractall(known(yes,_,_)),
+	retractall(alrd_recommended(_)),
 	greeting,
 	class_standing,
-	loop,
-	top_goal(X),
-	write('Your recommended class is '), write(X),nl,
+	recommendation,	
 	do(quit).
 	
+recommendation:-
+	repeat,
+		loop,
+		top_goal(X),
+		not_yet_recommended(X),
+		write('Your recommended class is '), write(X),nl,nl,
+		asserta(known(yes,recommended,X)),
+		write('Do you want to continue? (yes/no) '), read(Y), nl,
+	Y == no.
+	
+not_yet_recommended(X):-
+		not(known(yes,recommended,X)).
+		
+not_yet_recommended(X):-
+		write('There is no more class to recommend.'),
+		do(quit).
+	
 loop:-
-	write('Type "quit." to exit questions loop.'), nl,
+	write('Type "quit." to arrive at recommendation.'), nl,
 	repeat,	
 	write('What classes have you taken last semester? '),
 	read(X),
@@ -311,7 +327,7 @@ check_val(X,Attribute,Value,MenuList):-
 	
 solve :-
 	retractall(known(_,_,_)),
-	%top_goal(X),
+	top_goal(X),
 	nl, write('Your recommended course is '), write(X), nl, nl.
 solve :-
 	write('No answer found.'), nl,nl. 
