@@ -90,8 +90,7 @@ cscourse(mat2250):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	prereq(cs2640),
-	prereq(cs3110).
+	prereq(mat1150).
 	
 cscourse(phy1510):-
 	year(sophomore);
@@ -99,13 +98,13 @@ cscourse(phy1510):-
 	year(senior),
 	prereq(mat1140);
 	prereq(mat1150),
-	coreq(phy1510L).
+	coreq(phy1510l).
 	
 cscourse(phy1520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
-	coreq(phy1520L).
+	coreq(phy1520l).
 	
 cscourse(sta2260):-
 	year(sophomore);
@@ -160,140 +159,140 @@ cscourse(cs1280):-
 
 
 % elective cs courses
-cselective(cs3520):-
+eligible(cs3520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs3700):-
+eligible(cs3700):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs3310)).
 
-cselective(cs3800):-
+eligible(cs3800):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400);
 	prereq(cs2640)).
 
-cselective(cs4110):-
+eligible(cs4110):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs3110)).
 
-cselective(cs4200):-
+eligible(cs4200):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs3310)).
 
-cselective(cs4210):-
+eligible(cs4210):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2410));
 	(prereq(cs3010)).
 
-cselective(cs4250):-
+eligible(cs4250):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(cs4350):-
+eligible(cs4350):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs4450):-
+eligible(cs4450):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400));
 	(prereq(cs2560)).
 
-cselective(cs4500):-
+eligible(cs4500):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(cs4600):-
+eligible(cs4600):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs4650):-
+eligible(cs4650):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs4700):-
+eligible(cs4700):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs4750):-
+eligible(cs4750):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs2400)).
 
-cselective(cs4810):-
+eligible(cs4810):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(cs4990):-
+eligible(cs4990):-
 	year(senior).
 
-cselective(cs2450):-
+eligible(cs2450):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs1400)).
 
-cselective(cs2520):-
+eligible(cs2520):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs1400), prereq(cs1280)).
 
-cselective(cs2560):-
+eligible(cs2560):-
 	year(sophomore);
 	year(junior);
 	year(senior),
 	(prereq(cs1400), prereq(cs1280)).
 
-cselective(cs2990):-
+eligible(cs2990):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(cs2000):-
+eligible(cs2000):-
 	year(sophomore);
 	year(junior);
 	year(senior).
 
-cselective(cs4000):-
+eligible(cs4000):-
 	year(junior);
 	year(senior).
 
-cselective(cs4410):-
+eligible(cs4410):-
 	year(junior);
 	year(senior).
 
-cselective(cs4610):-
+eligible(cs4610):-
 	year(junior);
 	year(senior).
 
-cselective(cs4620):-
+eligible(cs4620):-
 	year(junior);
 	year(senior),
 	(prereq(cs4610)).
@@ -323,16 +322,18 @@ main:-
 greeting:-
 	write('Expert System for CS Courses Recommendation at CPP.'), nl,
 	write('Type "consult." to start consulting.'), nl,
-	write('Type "question." to verify class eligibility.'), nl,
+	write('Type "question." to verify CS Elective eligibility.'), nl,
 	write('Type "quit." to exit.'), nl,
 	nl.
 	
 do(consult):-
 	solve,
+	nl,
 	!.
 	
 do(question):-
 	resolve,
+	nl,
 	!.
 	
 do(quit).
@@ -340,7 +341,7 @@ do(quit).
 do(X):-
 	write(X),
 	write(' is not a command.'),
-	nl,
+	nl,nl,
 	fail.     					% update KB with known clauses
 	
 ask(Attribute, Value):-
@@ -355,7 +356,7 @@ ask(Attribute, Value):-
 ask(Attribute, Value):-
 	write(Attribute:Value),         		% ask user
 	write('? : '),
-	read(Y),            					% get the answer
+	read(Y), nl,           					% get the answer
 	asserta(known(Y, Attribute, Value)), 	% remember it
     Y == yes. 								% succeed or fail 
 	
@@ -369,7 +370,7 @@ menuask(Attribute,_,_) :-
 menuask(Attribute,Value,MenuList):-
 	write('What is the value for '),write(Attribute), write('?'), nl,
 	write(MenuList),nl,
-	read(X),
+	read(X),nl,
 	check_val(X,Attribute,Value,MenuList),
 	asserta(known(yes,Attribute,X)),
 	X==Value.
@@ -379,22 +380,22 @@ check_val(X,Attribute,Value,MenuList):-
 	!.
 	
 check_val(X,Attribute,Value,MenuList):-
-	write(X), write(' is not a legal value, try again.'), nl,
+	write(X), write(' is not a legal value, try again.'), nl,nl,
 	menuask(Attribute, Value, MenuList). 
 	
 	
 solve :-
 	retractall(known(_,_,_)),
 	top_goal(X),
-	write('Your recommended course is '), write(X), nl.
+	nl, write('Your recommended course is '), write(X), nl, nl.
 solve :-
-	write('No answer found.'), nl. 
+	write('No answer found.'), nl,nl. 
 	
 resolve :-
-	write('What class do you want to take (ex. cs3750)? '),nl,
+	write('What class do you want to take (ex. cs3750)? '),nl,nl,
 	read(X),
-	top_goal(X) -> (write('Eligible! '),nl);
-	write('Not eligible. '),nl.
+	eligible(X) -> (write('Eligible! '),nl,nl);
+	write('Not eligible. '),nl,nl.
 	
 	
 
