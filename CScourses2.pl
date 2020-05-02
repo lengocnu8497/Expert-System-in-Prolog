@@ -6,38 +6,33 @@ top_goal(X):-
 % experiment
 eligible(cs1300):-
 	not(known(yes,cscourse,cs1300)),
-    known(yes,year,freshman),
-	known(yes,cscourse,mat1150).
+	known(yes,cscourse,mat1140).
 	
 eligible(cs3520):-
 	not(known(yes,cscourse,cs3520)), 
-	(known(yes,year,junior);
-	known(yes,cscourse,cs2400)).
+	known(yes,cscourse,cs2400).
 		
 eligible(cs2400):-
 	not(known(yes,cscourse,cs2400)),
-	known(yes,year,sophomore),
-	known(yes,cscourse,cs1400).
+	(known(yes,cscourse,mat1140);
+	known(yes,cscourse,mat1150),
+	known(yes,cscourse,cs1400)).
 	
 eligible(cs2640):-
 	not(known(yes,cscourse,cs2640)),
-    known(yes,year,sophomore),
     known(yes,cscourse,cs2400).
 	
 eligible(cs3110):-
 	not(known(yes,cscourse,cs3110)),
-    known(yes,year,junior),
     known(yes,cscourse,cs2400).
 	
 eligible(cs3310):-
 	not(known(yes,cscourse,cs3310)),
-    known(yes,year,junior),
     known(yes,cscourse,cs2400),
-	known(yes,cscourse,mat2250).
+	known(yes,cscourse,sta2260).
 	
 eligible(cs3650):-
 	not(known(yes,cscourse,cs3650)),
-	known(yes,year,junior),
 	known(yes,cscourse,cs2640).
 	
 eligible(cs3750):-
@@ -47,16 +42,12 @@ eligible(cs3750):-
 	
 eligible(cs4080):-
 	not(known(yes,cscourse,cs4080)),
-	(known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,cs2640),
+	(known(yes,cscourse,cs2640),
 	known(yes,cscourse,cs3110)).
 	
 eligible(cs4310):-
 	not(known(yes,cscourse,cs4310)),
-	(known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,cs2400),
+	(known(yes,cscourse,cs2400),
 	known(yes,cscourse,cs3650)).
 	
 eligible(cs4630):-
@@ -65,38 +56,24 @@ eligible(cs4630):-
 	
 eligible(cs4800):-
 	not(known(yes,cscourse,cs4800)),
-	(known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,cs2400)).
+	known(yes,cscourse,cs2400).
 	
 eligible(mat2250):-
 	not(known(yes,cscourse,mat2250)),
-	(known(yes,year,sophomore);
-	known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,mat1150)).
+	known(yes,cscourse,mat1150).
 	
 eligible(phy1510):-
 	not(known(yes,cscourse,phy1510)),
-	(known(yes,year,sophomore);
-	known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,mat1140);
+	(known(yes,cscourse,mat1140);
 	known(yes,cscourse,mat1150)).
 	
 eligible(phy1520):-
 	not(known(yes,cscourse,phy1520)),
-	(known(yes,year,sophomore);
-	known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,phy1510)).
+	known(yes,cscourse,phy1510).
 	
 eligible(sta2260):-
 	not(known(yes,cscourse,sta2260)),
-	(known(yes,year,sophomore);
-	known(yes,year,junior);
-	known(yes,year,senior),
-	known(yes,cscourse,mat1150);
+	(known(yes,cscourse,mat1150);
 	known(yes,cscourse,mat1310)).
 
 cs1300:-
@@ -218,14 +195,25 @@ recommendation:-
 	repeat,
 		loop,
 		top_goal(X),
-		not_yet_recommended(X),
+		%not_yet_recommended(X),
 		write('Your recommended class is '), write(X),nl,nl,
-		asserta(known(yes,recommended,X)),
+		% asserta(alrd_recommended(X)),
 		write('Do you want to continue? (yes/no) '), read(Y), nl,
 	Y == no.
 	
+%recommendation:-
+%	loop,
+%	top_goal(X),
+	%not_yet_recommended(X),
+%	write('Your recommended class is '), write(X),nl,nl,
+	%asserta(alrd_recommended(X)),
+%	write('Do you want to continue? (yes/no) '),
+%	read(Response), 
+%	((Response == yes) ->  recommendation;
+%	 !).
+	
 not_yet_recommended(X):-
-		not(known(yes,recommended,X)).
+		not(alrd_recommended(X)).
 		
 not_yet_recommended(X):-
 		write('There is no more class to recommend.'),
@@ -235,7 +223,7 @@ loop:-
 	write('Type "quit." to arrive at recommendation.'), nl,
 	repeat,	
 	write('What classes have you taken last semester? '),
-	read(X),
+	read(X),nl,
 	do(X),
 	X == quit.
 	
