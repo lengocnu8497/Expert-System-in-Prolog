@@ -6,21 +6,27 @@ top_goal(X):-
 % experiment
 eligible(cs1300):-
 	not(known(yes,cscourse,cs1300)),
-	known(yes,cscourse,mat1140).
+	(known(yes,cscourse,mat1050),known(yes,cscourse,mat1060);
+	known(yes,cscourse,mat1140);
+	known(yes,cscourse,mat1150);
+	known(yes,cscourse,mat2140)).
 	
 eligible(cs3520):-
-	not(known(yes,cscourse,cs3520)), 
-	known(yes,cscourse,cs2400).
+	not(known(yes,cscourse,cs3520)),
+	known(yes,cscourse,cs2400)).
 		
 eligible(cs2400):-
 	not(known(yes,cscourse,cs2400)),
+	known(yes,cscourse,cs1400),
+	known(yes,cscourse,cs1300),
 	(known(yes,cscourse,mat1140);
-	known(yes,cscourse,mat1150),
-	known(yes,cscourse,cs1400)).
+	known(yes,cscourse,mat1150);
+	known(yes,cscourse,mat2140)).
 	
 eligible(cs2640):-
 	not(known(yes,cscourse,cs2640)),
-    known(yes,cscourse,cs2400).
+	(known(yes,cscourse,cs1300),
+	known(yes,cscourse,cs1400)).
 	
 eligible(cs3110):-
 	not(known(yes,cscourse,cs3110)),
@@ -42,12 +48,16 @@ eligible(cs3750):-
 	
 eligible(cs4080):-
 	not(known(yes,cscourse,cs4080)),
-	(known(yes,cscourse,cs2640),
+	(known(yes,year,junior);
+	known(yes,year,senior),
+	known(yes,cscourse,cs2640),
 	known(yes,cscourse,cs3110)).
 	
 eligible(cs4310):-
 	not(known(yes,cscourse,cs4310)),
-	(known(yes,cscourse,cs2400),
+	(known(yes,year,junior);
+	known(yes,year,senior),
+	known(yes,cscourse,cs2400),
 	known(yes,cscourse,cs3650)).
 	
 eligible(cs4630):-
@@ -56,7 +66,9 @@ eligible(cs4630):-
 	
 eligible(cs4800):-
 	not(known(yes,cscourse,cs4800)),
-	known(yes,cscourse,cs2400).
+	(known(yes,year,junior);
+	known(yes,year,senior),
+	known(yes,cscourse,cs2400)).
 	
 eligible(mat2250):-
 	not(known(yes,cscourse,mat2250)),
@@ -69,13 +81,130 @@ eligible(phy1510):-
 	
 eligible(phy1520):-
 	not(known(yes,cscourse,phy1520)),
-	known(yes,cscourse,phy1510).
+	(known(yes,cscourse,phy1510)).
 	
 eligible(sta2260):-
 	not(known(yes,cscourse,sta2260)),
 	(known(yes,cscourse,mat1150);
 	known(yes,cscourse,mat1310)).
 
+eligible(bio1110):-
+	not(known(yes,cscourse,bio1110)),
+	(known(yes,year,freshman);
+	known(yes,cscourse,bio1110l)).
+
+eligible(bio1110l):-
+	not(known(yes,cscourse,bio1110l)),
+	(known(yes,year,freshman);
+	known(yes,cscourse,bio1110)).
+
+eligible(cs1260):-
+	not(known(yes,cscourse,cs1260)),
+	(known(yes,cscourse,mat1050), known(yes,cscourse,mat1060);
+	known(yes,cscourse,mat1140);
+	known(yes,cscourse,mat1150)).
+
+eligible(cs1280):-
+	not(known(yes,cscourse,cs1280)),
+	(known(yes,cscourse,mat1050),known(yes,cscourse,mat1060);
+	known(yes,cscourse,mat1140);
+	known(yes,cscourse,mat1150);
+	known(yes,cscourse,mat2140).
+
+eligible(cs1400):-
+	not(known(yes,cscourse,cs1400)),
+	(known(yes,cscourse,mat1050),known(yes,cscourse,mat1060);
+	known(yes,cscourse,mat1140);
+	known(yes,cscourse,mat1150);
+	known(yes,cscourse,mat2140)).
+
+eligible(cs2450):-
+	not(known(yes,cscourse,cs2450)),
+	known(yes,cscourse,cs1400).
+
+eligible(cs2560):-
+	not(known(yes,cscourse,cs2560)),
+	(known(yes,cscourse,1280);
+	known(yes,cscourse,1400)).
+
+eligible(cs2600):-
+	not(known(yes,cscourse,cs2600)),
+	(known(yes,cscourse,1280);
+	known(yes,cscourse,1400)).
+
+eligible(cs3010):-
+	not(known(yes,cscourse,cs3010)),
+	(known(yes,cscourse,mat1150),
+	known(yes,cscourse,cs2400)).
+
+eligible(cs3520):-
+	not(known(yes,cscourse,cs3520)),
+	(known(yes,cscourse,cs2400)).
+
+eligible(cs3560):-
+	not(known(yes,cscourse,cs3560)),
+	(known(yes,cscourse,cs2400)).
+
+eligible(cs3700):-
+	not(known(yes,cscourse,cs3700)),
+	known(yes,cscourse,cs3310).
+
+eligible(cs3800):-
+	not(known(yes,cscourse,cs3800)),
+	(known(yes,cscourse,cs2400),
+	known(yes,cscourse,cs2640)).
+
+eligible(cs4110):-
+	not(known(yes,cscourse,cs4110)),
+	known(yes,cscourse,cs3110).
+
+eligible(cs4200):-
+	not(known(yes,cscourse,cs4200)),
+	known(yes,cscourse,cs3310).
+
+eligible(cs4210):-
+	not(known(yes,cscourse,cs4210)),
+	(known(yes,cscourse,cs3010)).
+
+eligible(cs4250):-
+	not(known(yes,cscourse,cs4250)),
+	(known(yes,cscourse,cs2400)).
+
+eligible(cs4350):-
+	not(known(yes,cscourse,cs4350)),
+	known(yes,cscourse,cs2400).
+
+eligible(cs4450):-
+	not(known(yes,cscourse,cs4450)),
+	(known(yes,cscourse,cs2400),
+	known(yes,cscourse,cs2560)).
+
+eligible(cs4500):-
+	not(known(yes,cscourse,cs4500)),
+	known(yes,cscourse,cs3110).
+
+eligible(cs4600):-
+	not(known(yes,cscourse,cs4600)),
+	known(yes,cscourse,cs2400).
+
+eligible(cs4650):-
+	not(known(yes,cscourse,cs4650)),
+	known(yes,cscourse,cs2400).
+
+eligible(cs4700):-
+	not(known(yes,cscourse,cs4700)),
+	known(yes,cscourse,cs2400).
+
+eligible(cs4750):-
+	not(known(yes,cscourse,cs4750)),
+	known(yes,cscourse,cs2400).
+
+eligible(cs4810):-
+	not(known(yes,cscourse,cs4810)),
+	(known(yes,cscourse,cs4350),
+	known(yes,cscourse,cs4800)).
+
+%Assert Knowns
 cs1300:-
 	mat1150,
 	asserta(known(yes,cscourse,cs1300)).
@@ -102,7 +231,7 @@ cs3110:-
 	
 cs3310:-
 	cs2400,
-	mat2250,
+	sta2260,
 	asserta(known(yes,cscourse,cs3310)).
 	
 cs3650:-
@@ -125,6 +254,7 @@ cs4630:-
 	asserta(known(yes,cscourse,cs4630)).
 	
 cs4800:-
+	cs2400,
 	asserta(known(yes,cscourse,cs4800)).
 	
 mat2250:-
@@ -143,6 +273,7 @@ phy1520:-
 	
 sta2260:-
 	mat1310,
+	mat1150,
 	asserta(known(yes,cscourse,sta2260)).
 
 mat1150:-
@@ -156,6 +287,113 @@ mat1310:-
 	mat1150,
 	asserta(known(yes,cscourse,mat1310)).
 
+mat1050:-
+	asserta(known(yes,cscourse,mat1050)).
+
+mat1060:-
+	mat1050
+	asserta(known(yes,cscourse,mat1060)).
+
+bio1110:-
+	bio1110l,
+	asserta(known(yes,cscourse,bio1110)).
+
+bio1110l:-
+	asserta(known(yes,cscourse,bio1110l)).
+
+cs1260:-
+	mat1150,
+	asserta(known(yes,cscourse,cs1260)).
+
+cs1280:-
+	mat1150,
+	asserta(known(yes,cscourse,cs1280)).
+
+cs2450:-
+	cs1400,
+	asserta(known(yes,cscourse,cs2450)).
+
+cs2560:-
+	cs1280,
+	cs1400,
+	asserta(known(yes,cscourse,cs2560)).
+
+cs2600:-
+	cs1280,
+	cs1400,
+	asserta(known(yes,cscourse,cs2600)).
+
+cs3010:-
+	mat1150,
+	cs2400,
+	asserta(known(yes,cscourse,cs3010)).
+
+cs3520:-
+	cs2400,
+	asserta(known(yes,cscourse,cs3520)).
+
+cs3560:-
+	cs2400,
+	asserta(known(yes,cscourse,cs3560)).
+
+cs3700:-
+	cs3310,
+	asserta(known(yes,cscourse,cs3700)).
+
+cs3800:-
+	cs2640,
+	asserta(known(yes,cscourse,cs3800)).
+
+cs4110:-
+	cs3110,
+	asserta(known(yes,cscourse,cs4110)).
+	
+cs4200:-
+	cs3310,
+	asserta(known(yes,cscourse,cs4200)).
+
+cs4210:-
+	cs3010,
+	asserta(known(yes,cscourse,cs3010)).
+	
+cs4250:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4250)).
+
+cs4350:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4350)).
+
+cs4450:-
+	cs2560,
+	cs2400,
+	asserta(known(yes,cscourse,cs4450)).
+
+cs4500:-
+	cs3110,
+	asserta(known(yes,cscourse,cs4500)).
+
+cs4600:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4600)).
+
+cs4650:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4650)).
+
+cs4700:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4700)).
+
+cs4750:-
+	cs2400,
+	asserta(known(yes,cscourse,cs4750)).
+
+cs4810:-
+	cs4350,
+	cs4800,
+	asserta(known(yes,cscourse,cs4810)).
+	
 % class standing inference	
 
 senior:-
@@ -195,25 +433,14 @@ recommendation:-
 	repeat,
 		loop,
 		top_goal(X),
-		%not_yet_recommended(X),
+		not_yet_recommended(X),
 		write('Your recommended class is '), write(X),nl,nl,
-		% asserta(alrd_recommended(X)),
+		asserta(known(yes,recommended,X)),
 		write('Do you want to continue? (yes/no) '), read(Y), nl,
 	Y == no.
 	
-%recommendation:-
-%	loop,
-%	top_goal(X),
-	%not_yet_recommended(X),
-%	write('Your recommended class is '), write(X),nl,nl,
-	%asserta(alrd_recommended(X)),
-%	write('Do you want to continue? (yes/no) '),
-%	read(Response), 
-%	((Response == yes) ->  recommendation;
-%	 !).
-	
 not_yet_recommended(X):-
-		not(alrd_recommended(X)).
+		not(known(yes,recommended,X)).
 		
 not_yet_recommended(X):-
 		write('There is no more class to recommend.'),
@@ -223,7 +450,7 @@ loop:-
 	write('Type "quit." to arrive at recommendation.'), nl,
 	repeat,	
 	write('What classes have you taken last semester? '),
-	read(X),nl,
+	read(X),
 	do(X),
 	X == quit.
 	
@@ -327,6 +554,7 @@ resolve :-
 	write('Not eligible. '),nl,nl.
 	
 	
+
 
 
 
